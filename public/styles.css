@@ -34,4 +34,7 @@ body {
 
 #deleteBtn {
     margin-top: 1rem;
+    margin-right: 1rem;
+    background-color: rgb(146, 128, 107);
+    border: none;
 }
