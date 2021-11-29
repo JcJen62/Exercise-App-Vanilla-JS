@@ -6,3 +6,32 @@ main {
 body {
     background-color: bisque;
 }
+
+#appTitle {
+    text-align: center;
+}
+
+.card {
+    margin-right: 1rem;
+}
+
+#cards {
+    display: flex;
+    flex-direction: row;
+}
+
+#futureExer {
+    margin: 1rem;
+}
+
+#currentExer {
+    margin: 1rem;
+}
+
+#previousExer {
+    margin: 1rem;
+}
+
+#deleteBtn {
+    margin-top: 1rem;
+}
