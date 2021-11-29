@@ -1,0 +1,11 @@
+{
+  "name": "exercise-app",
+  "version": "1.0.0",
+  "description": "Final",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "",
+  "license": "ISC"
+}
