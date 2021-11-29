@@ -14,4 +14,4 @@ const currentExercisesSchema = new Schema({
     }
 })
 
-export const Todos = mongoose.model('currentExercises', currentExercisesSchema, "Current")
+export const CurrentExercisses = mongoose.model('currentExercises', currentExercisesSchema, "Current")
