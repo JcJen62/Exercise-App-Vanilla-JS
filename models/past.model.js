@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const Schema = mongoose.Schema
-const presentExercisesSchema = new Schema({
+const pastExercisesSchema = new Schema({
     title: {
         type: String,
         required: true,
@@ -14,4 +14,4 @@ const presentExercisesSchema = new Schema({
     }
 })
 
-export const PresentExercisses = mongoose.model('presentExercises', presentExercisesSchema, "Current")
+export const PastExercisses = mongoose.model('pastExercises', pastExercisesSchema, "Past")
