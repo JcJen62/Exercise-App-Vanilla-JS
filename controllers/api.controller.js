@@ -12,7 +12,7 @@ export const getExercises = async (req, res) => {
 
 // Start Past Exercises
 // Get All
-export const getAllPastExercise = async (req, res) => {
+export const getAllPastExercises = async (req, res) => {
     try {
         const pastExercises = await PastExercisses.find().lean().exec()
         res.status(200).json(pastExercises)
@@ -24,7 +24,7 @@ export const getAllPastExercise = async (req, res) => {
 }
 
 // Delete Past Exercise
-export const deletePastExercise = async (req, res) => {
+export const deletePastExercises = async (req, res) => {
     try{
         PastExercisses.findOneAndDelete({title: req.params.title}, (err, exercise) => {
             console.log(exericse)
@@ -41,7 +41,7 @@ export const deletePastExercise = async (req, res) => {
 
 // Start Current Exercises
 // Get All
-export const getAllCurrentExercise = async (req, res) => {
+export const getAllCurrentExercises = async (req, res) => {
     try {
         const currentExercises = await CurrentExercisses.find().lean().exec()
         res.status(200).json(currentExercises)
@@ -56,7 +56,7 @@ export const getAllCurrentExercise = async (req, res) => {
 
 // Start Future Exericise
 // Get All
-export const getAllFutureExercise = async (req, res) => {
+export const getAllFutureExercises = async (req, res) => {
     try {
         const futureExercises = await FutureExercisses.find().lean().exec()
         res.status(200).json(futureExercises)

@@ -1,3 +1,5 @@
+import * as dotenv from "dotenv";
+
 async function FetchCurrentExercises() {
     let currentExercises = {}
 
@@ -23,5 +25,27 @@ async function FetchPreviousExercises() {
         .then(response => response.json())
         .then(data => previousExercises = data);
     return previousExercises
+}
+
+async function search(term) {
+    var options = {
+        method: 'GET',
+        url: 'https://exercisedb.p.rapidapi.com/exercises',
+        headers: {
+          'x-rapidapi-host': process.env.RAPIDAPI_HOST,
+          'x-rapidapi-key': process.env.RAPIDAPI_KEY
+        }
+      };
+
+
+    let result = []
+    await fetch(`https://exercisedb.p.rapidapi.com/exercises/name/${encodeURI(term)}`, options)
+        .then(response => response.text())
+        .then(res => {
+            result = JSON.parse(res)
+        })
+        .catch(error => console.log('error', error));
+
+    return result
 }
 
