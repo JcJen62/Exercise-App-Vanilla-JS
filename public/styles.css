@@ -7,6 +7,18 @@ body {
     background-color: bisque;
 }
 
+#search{
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 2rem;
+}
+
+#searchInput {
+    background-color: rgb(146, 128, 107);
+    border: none;
+    color: white;
+}
+
 #appTitle {
     text-align: center;
 }

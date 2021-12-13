@@ -24,3 +24,4 @@ async function FetchPreviousExercises() {
         .then(data => previousExercises = data);
     return previousExercises
 }
+
