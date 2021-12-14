@@ -1,6 +1,19 @@
 import { PastExercises} from "../models/past.model.js"
 import { CurrentExercisses } from "../models/current.model.js";
 import { FutureExercisses } from "../models/future.model.js";
+import dotenv from 'dotenv'
+
+// Search Exercises
+export const getKey = async (req, res) => {
+    try {
+        let response = {"key": process.env.API_KEY}
+        console.log(response)
+        res.status(200).json(response)
+    }
+    catch (err) {
+        console.log(err)
+    }
+}
 
 // Start Past Exercises
 // Get All

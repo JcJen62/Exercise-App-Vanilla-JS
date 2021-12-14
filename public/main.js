@@ -1,4 +1,12 @@
 
+let key = ""
+
+async function getAPIKey() {
+    await fetch(`/api/key`)
+        .then(response => response.json())
+        .then(data => key = data.key)
+}
+
 async function FetchCurrentExercises() {
     let currentExercises = {}
 
@@ -32,7 +40,7 @@ async function search(terms) {
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "exercisedb.p.rapidapi.com",
-            "x-rapidapi-key": "aab1a648f7msh91467b68b49c58bp1f7bf9jsnd862ab37e593"
+            "x-rapidapi-key": key
         }
     })
         .then(response => response.text())
@@ -202,7 +210,7 @@ async function displayCurrentExercises() {
     })
 }
 
-
+getAPIKey()
 displayPastExercises()
 displayCurrentExercises()
 displayFutureExercises()

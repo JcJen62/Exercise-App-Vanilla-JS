@@ -2,11 +2,15 @@ import { Router } from "express";
 import { getAllPastExercises,
         deletePastExercises,  
         getAllCurrentExercises, 
-        getAllFutureExercises} 
+        getAllFutureExercises,
+        getKey} 
     from "../controllers/api.controller.js";
 
 
 const apiRouter = Router();
+
+//API Key Route
+apiRouter.get('/key', getKey)
 
 // Past
 apiRouter.get("/pastExercises", getAllPastExercises)
