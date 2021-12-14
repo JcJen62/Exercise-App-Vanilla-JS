@@ -7,11 +7,11 @@ const futureExercisesSchema = new Schema({
         required: true,
     },
     id: {
-        type: Number,
+        type: String,
     },
     notes: {
         type: String,
     }
 })
 
-export const FutureExercisses = mongoose.model('futureExercises', futureExercisesSchema, "Current")
+export const FutureExercises = mongoose.model('futureExercises', futureExercisesSchema, "Future")

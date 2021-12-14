@@ -90,6 +90,76 @@ function updateList(arr) {
     });
 }
 
+let addFuture = document.querySelector(".addFuture")
+addFuture.addEventListener("click", () => {
+    let checked = document.querySelectorAll(".form-check-input")
+
+    checked.forEach(element => {
+        if (element.checked) {
+            const addFutureExer = async (data) => {
+                const response = await fetch(`api/addFuture`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+            }
+            addFutureExer({ "id": element.id, "name": element.name, "notes": "" })
+        }
+
+    })
+
+    document.querySelector(".future-card").innerHTML = ""
+    displayFutureExercises()
+})
+
+let addCurrent = document.querySelector(".addCurrent")
+addCurrent.addEventListener("click", () => {
+    let checked = document.querySelectorAll(".form-check-input")
+
+    checked.forEach(element => {
+        if (element.checked) {
+            const addCurrentExer = async (data) => {
+                const response = await fetch(`api/addCurrent`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+            }
+            addCurrentExer({ "id": element.id, "name": element.name, "notes": "" })
+        }
+    })
+
+    document.querySelector(".current-card").innerHTML = ""
+    displayCurrentExercises()
+})
+
+let addPast = document.querySelector(".addPast")
+addPast.addEventListener("click", () => {
+    let checked = document.querySelectorAll(".form-check-input")
+
+    checked.forEach(element => {
+        if (element.checked) {
+            const addPastExer = async (data) => {
+                const response = await fetch(`api/addPast`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+            }
+            addPastExer({ "id": element.id, "name": element.name, "notes": "" })
+        }
+    })
+
+    document.querySelector(".past-card").innerHTML = ""
+    displayPastExercises()
+})
+
 async function displayFutureExercises() {
     let futureExercises = await FetchFutureExercises();
     let futureDiv = document.querySelector('.future-card')
@@ -112,10 +182,58 @@ async function displayFutureExercises() {
         cardNote.appendChild(document.createTextNode(`${element.notes}`))
         cardBody.appendChild(cardNote)
 
-        const checkBox = document.createElement('input')
-        checkBox.setAttribute('type', 'checkbox')
-        checkBox.setAttribute('id', 'check')
-        cardBody.appendChild(checkBox)
+        const addToCurrent = document.createElement('a')
+        addToCurrent.classList.add('card-link')
+        addToCurrent.setAttribute('href', '#')
+        addToCurrent.setAttribute('id', `${element.id}`)
+        addToCurrent.setAttribute('data-name', element.name)
+        addToCurrent.setAttribute('data-notes', element.notes)
+        addToCurrent.innerHTML = 'Add To Past'
+        cardBody.appendChild(addToCurrent)
+
+        addToCurrent.addEventListener('click', (event) => {
+            const addCurrentExer = async (data) => {
+                const response = await fetch(`api/addCurrent`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+            }
+            const deleteFuture = async (data) => {
+                const response = await fetch(`api/deleteFuture/${event.currentTarget.id}`, {
+                    method: 'DELETE'
+                })
+            }
+            addCurrentExer({ "id": event.currentTarget.id, "name": event.currentTarget.dataset.name, "notes": event.currentTarget.dataset.notes })
+            deleteFuture()
+
+            document.querySelector(".future-card").innerHTML = ""
+            document.querySelector(".current-card").innerHTML = ""
+            displayPastExercises()
+            displayCurrentExercises()
+        })
+
+        const deleteItem = document.createElement('a')
+        deleteItem.classList.add('card-link')
+        deleteItem.classList.add('delete-card')
+        deleteItem.setAttribute('href', '#')
+        deleteItem.setAttribute('id', `${element.id}`)
+        deleteItem.innerHTML = 'Delete Exercise'
+        cardBody.appendChild(deleteItem)
+
+        deleteItem.addEventListener('click', (event) => {
+            const deleteExer = async () => {
+                const response = await fetch(`api/deleteFuture/${event.currentTarget.id}`, {
+                    method: 'DELETE'
+                })
+            }
+            deleteExer()
+
+            document.querySelector(".future-card").innerHTML = ""
+            displayFutureExercises()
+        })
 
         cardDiv.appendChild(cardBody)
         futureDiv.appendChild(cardDiv)
@@ -144,22 +262,31 @@ async function displayPastExercises() {
         cardNote.appendChild(document.createTextNode(`${element.notes}`))
         cardBody.appendChild(cardNote)
 
-        const deleteNotes = document.createElement('a')
-        deleteNotes.classList.add('card-link')
-        deleteNotes.setAttribute('href', '#')
-        deleteNotes.innerHTML = 'Delete Notes'
-        cardBody.appendChild(deleteNotes)
-
         const addNotes = document.createElement('a')
         addNotes.classList.add('card-link')
         addNotes.setAttribute('href', '#')
-        addNotes.innerHTML = 'Add Notes'
+        addNotes.innerHTML = 'Alter Notes'
         cardBody.appendChild(addNotes)
 
-        const checkBox = document.createElement('input')
-        checkBox.setAttribute('type', 'checkbox')
-        checkBox.setAttribute('id', 'check')
-        cardBody.appendChild(checkBox)
+        const deleteItem = document.createElement('a')
+        deleteItem.classList.add('card-link')
+        deleteItem.classList.add('delete-card')
+        deleteItem.setAttribute('href', '#')
+        deleteItem.setAttribute('id', `${element.id}`)
+        deleteItem.innerHTML = 'Delete Exercise'
+        cardBody.appendChild(deleteItem)
+
+        deleteItem.addEventListener('click', (event) => {
+            const deleteExer = async () => {
+                const response = await fetch(`api/deletePast/${event.currentTarget.id}`, {
+                    method: 'DELETE'
+                })
+            }
+            deleteExer()
+
+            document.querySelector(".past-card").innerHTML = ""
+            displayPastExercises()
+        })
 
         cardDiv.appendChild(cardBody)
         pastDiv.appendChild(cardDiv)
@@ -197,13 +324,41 @@ async function displayCurrentExercises() {
         const addNotes = document.createElement('a')
         addNotes.classList.add('card-link')
         addNotes.setAttribute('href', '#')
-        addNotes.innerHTML = 'Add Notes'
+        addNotes.innerHTML = 'Alter Notes'
         cardBody.appendChild(addNotes)
 
-        const checkBox = document.createElement('input')
-        checkBox.setAttribute('type', 'checkbox')
-        checkBox.setAttribute('id', 'check')
-        cardBody.appendChild(checkBox)
+        const addToPast = document.createElement('a')
+        addToPast.classList.add('card-link')
+        addToPast.setAttribute('href', '#')
+        addToPast.setAttribute('id', `${element.id}`)
+        addToPast.setAttribute('data-name', element.name)
+        addToPast.setAttribute('data-notes', element.notes)
+        addToPast.innerHTML = 'Add To Past'
+        cardBody.appendChild(addToPast)
+
+        addToPast.addEventListener('click', (event) => {
+            const addPastExer = async (data) => {
+                const response = await fetch(`api/addPast`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+            }
+            const deleteCurrent = async (data) => {
+                const response = await fetch(`api/deleteCurrent/${event.currentTarget.id}`, {
+                    method: 'DELETE'
+                })
+            }
+            addPastExer({ "id": event.currentTarget.id, "name": event.currentTarget.dataset.name, "notes": event.currentTarget.dataset.notes })
+            deleteCurrent()
+
+            document.querySelector(".past-card").innerHTML = ""
+            document.querySelector(".current-card").innerHTML = ""
+            displayPastExercises()
+            displayCurrentExercises()
+        })
 
         cardDiv.appendChild(cardBody)
         currentDiv.appendChild(cardDiv)

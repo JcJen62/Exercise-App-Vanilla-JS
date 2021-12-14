@@ -7,11 +7,11 @@ const currentExercisesSchema = new Schema({
         required: true,
     },
     id: {
-        type: Number,
+        type: String,
     },
     notes: {
         type: String,
     }
 })
 
-export const CurrentExercisses = mongoose.model('currentExercises', currentExercisesSchema, "Current")
+export const CurrentExercises = mongoose.model('currentExercises', currentExercisesSchema, "Current")

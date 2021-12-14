@@ -46,11 +46,13 @@ body {
 
 .card {
     margin-right: 1rem;
+    margin-top: 0.5rem;
 }
 
 #cards {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 #futureExer {
@@ -89,7 +91,7 @@ body {
     justify-content: center;
 }
 
-#check {
+.card-check {
     margin: 1rem;
     width: 20px;
     height: 20px;
