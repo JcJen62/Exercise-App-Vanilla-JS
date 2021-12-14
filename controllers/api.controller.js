@@ -1,20 +1,13 @@
-import { PastExercisses } from "../models/past.model";
-import { CurrentExercisses } from "../models/current.model";
-import { FutureExercisses } from "../models/future.model";
-import { Exercises } from '../models/exercises.model';
-import { v4 as uuidv4 } from 'uuid';
-
-// Get Exercises Search
-export const getExercises = async (req, res) => {
-    
-}
-
+import { PastExercises} from "../models/past.model.js"
+import { CurrentExercisses } from "../models/current.model.js";
+import { FutureExercisses } from "../models/future.model.js";
 
 // Start Past Exercises
 // Get All
 export const getAllPastExercises = async (req, res) => {
     try {
-        const pastExercises = await PastExercisses.find().lean().exec()
+        const pastExercises = await PastExercises.find().lean().exec()
+        console.log(pastExercises)
         res.status(200).json(pastExercises)
     }
     catch (err) {
@@ -26,8 +19,8 @@ export const getAllPastExercises = async (req, res) => {
 // Delete Past Exercise
 export const deletePastExercises = async (req, res) => {
     try{
-        PastExercisses.findOneAndDelete({title: req.params.title}, (err, exercise) => {
-            console.log(exericse)
+        PastExercises.findOneAndDelete({title: req.params.title}, (err, exercise) => {
+            console.log(exercise)
             if (err) {
                 res.status(400).json({Message: `Could not find exercise to delete: ${err}`})
             }

@@ -18,46 +18,28 @@
       <h1 id="appTitle">Exercise App</h1>
 
       <div class="input-group" id="search">
-        <input id="searchBar" type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+        <a href="https://rapidapi.com/justin-WFnsXH_t6/api/exercisedb/details"><span>Search Terms List</span></a>
+        <input id="searchBar" type="search" class="form-control rounded" placeholder="Search By Body Part" aria-label="Search"
           aria-describedby="search-addon" />
         <button id="searchInput" type="button" class="btn btn-outline-primary">Search Exercises</button>
       </div>
 
+      <div id="searchItemsWrap">
+        <ul id="searchItems">
+
+        </ul>
+      </div>
+
+      <div id="listAddBtns">
+        <button id="addBtn" type="button" class="btn btn-primary btn-lg test">Add To Future Exercises</button>
+        <button id="addBtn" type="button" class="btn btn-primary btn-lg test">Add To Current Exercises</button>
+        <button id="addBtn" type="button" class="btn btn-primary btn-lg">Add To Past Exercises</button>
+      </div>
+
       <div id="futureExer">
         <h2>Furture Exercises</h2>
-        <div id="cards">
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.</p>
-              <a href="#" class="card-link">Delete Notes</a>
-              <a href="#" class="card-link">Add Notes</a>
-            </div>
-          </div>
-
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.</p>
-              <a href="#" class="card-link">Card link</a>
-              <a href="#" class="card-link">Another link</a>
-            </div>
-          </div>
-
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.</p>
-              <a href="#" class="card-link">Card link</a>
-              <a href="#" class="card-link">Another link</a>
-            </div>
-          </div>
+        <div id="cards" class="future-card">
+          
         </div>
         <button id="deleteBtn" type="button" class="btn btn-primary btn-lg">Delete Selected Exercises</button>
         <button id="deleteBtn" type="button" class="btn btn-primary btn-lg">Move Selected Exercises to Current</button>
@@ -66,61 +48,20 @@
       <div id="currentExer">
         <h2>Current Exercises</h2>
 
-        <div id="cards">
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.</p>
-              <a href="#" class="card-link">Card link</a>
-              <a href="#" class="card-link">Another link</a>
-              <input type="checkbox" id="check">
-            </div>
-          </div>
-
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.</p>
-              <a href="#" class="card-link">Card link</a>
-              <a href="#" class="card-link">Another link</a>
-            </div>
-          </div>
+        <div id="cards" class="current-card">
+        
         </div>
         <button id="deleteBtn" type="button" class="btn btn-primary btn-lg">Move Selected Exercises to Previous</button>
       </div>
 
-      <div id="previousExer">
-        <h2>Previous Exercises</h2>
+      <div id="pastExer">
+        <h2>Past Exercises</h2>
 
-        <div id="cards">
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.</p>
-              <a href="#" class="card-link">Card link</a>
-              <a href="#" class="card-link">Another link</a>
-            </div>
-          </div>
-
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.</p>
-              <a href="#" class="card-link">Card link</a>
-              <a href="#" class="card-link">Another link</a>
-            </div>
-          </div>
+        <div id="cards" class="past-card">
+          
 
         </div>
-        <button id="deleteBtn" type="button" class="btn btn-primary btn-lg">Delete Seslected Exercises</button>
+        <button id="deleteBtn" type="button" class="btn btn-primary btn-lg">Delete Selected Exercises</button>
       </div>
     </main>
     <!-- Boostrap JS Bundle -->
@@ -128,7 +69,7 @@
       integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
       crossorigin="anonymous"></script>
     <!-- Main JS -->
-    <script src="./main.js"></script>
+    <script src="./main.js" type="module"></script>
   </body>
 
 </html>

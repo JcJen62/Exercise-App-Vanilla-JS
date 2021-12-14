@@ -8,9 +8,30 @@ body {
 }
 
 #search{
-    width: 60%;
+    width: 70%;
     margin: 0 auto;
     margin-top: 2rem;
+}
+
+#search a {
+    margin-right: 1rem;
+    text-decoration: none;
+}
+
+#searchItems{
+    list-style-type: none;
+    margin: 0 auto;
+    width: 50%;
+    margin-top: 0.5rem;
+}
+
+#searchItems li{
+    display: flex;
+}
+
+#searchItems li input {
+    margin-right: 0.8rem;
+    font-size: larger;
 }
 
 #searchInput {
@@ -40,7 +61,7 @@ body {
     margin: 1rem;
 }
 
-#previousExer {
+#pastExer {
     margin: 1rem;
 }
 
@@ -49,6 +70,23 @@ body {
     margin-right: 1rem;
     background-color: rgb(146, 128, 107);
     border: none;
+}
+
+#addBtn {
+    background-color: rgb(146, 128, 107);
+    border: none;
+    padding: 0.5rem;
+    font-size: large;
+}
+
+.test {
+    margin-right: 0.8rem;
+}
+
+#listAddBtns {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 #check {

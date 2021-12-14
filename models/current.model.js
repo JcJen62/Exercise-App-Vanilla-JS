@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema
 const currentExercisesSchema = new Schema({
-    title: {
+    name: {
         type: String,
         required: true,
     },
