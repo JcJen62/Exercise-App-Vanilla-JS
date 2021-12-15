@@ -8,7 +8,6 @@ import { v4 as uuidv4 } from 'uuid';
 export const getKey = async (req, res) => {
     try {
         let response = {"key": process.env.API_KEY}
-        console.log(response)
         res.status(200).json(response)
     }
     catch (err) {
@@ -64,6 +63,25 @@ export const deletePastExercises = async (req, res) => {
     }
 }
 
+// Edit Past Exercise
+export const editPastExercise = async (req, res) => {
+    let exercise = {
+        name: req.body.name,
+        id: req.body.id,
+        notes: req.body.notes
+    }
+    console.log(exercise)
+    try {
+        console.log(req.body)
+        const edit = await PastExercises.findOneAndUpdate({ id: req.body.id }, exercise)
+        res.status(200).json({ Message: "Updated exercise"})
+    }
+    catch (err){
+        console.log(err)
+        res.status(400).json({ Message: "Couldn't update exercise"})
+    }
+}
+
 // Start Current Exercises
 // Get All
 export const getAllCurrentExercises = async (req, res) => {
@@ -110,6 +128,25 @@ export const deleteCurrentExercises = async (req, res) => {
     }
 }
 
+// Edit Current Exercises
+export const editCurrentExercise = async (req, res) => {
+    let exercise = {
+        name: req.body.name,
+        id: req.body.id,
+        notes: req.body.notes
+    }
+    console.log(exercise)
+    try {
+        console.log(req.body)
+        const edit = await CurrentExercises.findOneAndUpdate({ id: req.body.id }, exercise)
+        res.status(200).json({ Message: "Updated exercise"})
+    }
+    catch (err){
+        console.log(err)
+        res.status(400).json({ Message: "Couldn't update exercise"})
+    }
+}
+
 // Start Future Exericise
 // Get All
 export const getAllFutureExercises = async (req, res) => {
@@ -131,7 +168,6 @@ export const addFutureExercise = (req, res) => {
         id: uuidv4()
     })
     try{
-        console.log(req.body)
         newFutureExercise.save();
         res.status(200).json({Message: "Exercise added successfully!"})
     }
@@ -144,7 +180,6 @@ export const addFutureExercise = (req, res) => {
 export const deleteFutureExercises = async (req, res) => {
     try{
         FutureExercises.findOneAndDelete({id: req.params.id}, (err, exercise) => {
-            console.log(exercise)
             if (err) {
                 res.status(400).json({Message: `Could not find exercise to delete: ${err}`})
             }
@@ -153,5 +188,22 @@ export const deleteFutureExercises = async (req, res) => {
     }
     catch (err){
         res.status(400).json({ Message: `Could not delete exercise: ${err}`})
+    }
+}
+
+// Edit Future Exercises
+export const editFutureExercise = async (req, res) => {
+    let exercise = {
+        name: req.body.name,
+        id: req.body.id,
+        notes: req.body.notes
+    }
+    try {
+        const edit = await FutureExercises.findOneAndUpdate({ id: req.body.id }, exercise)
+        res.status(200).json({ Message: "Updated exercise"})
+    }
+    catch (err){
+        console.log(err)
+        res.status(400).json({ Message: "Couldn't update exercise"})
     }
 }

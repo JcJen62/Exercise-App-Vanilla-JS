@@ -47,6 +47,7 @@ body {
 .card {
     margin-right: 1rem;
     margin-top: 0.5rem;
+    width: 100%;
 }
 
 #cards {
@@ -95,4 +96,12 @@ body {
     margin: 1rem;
     width: 20px;
     height: 20px;
+}
+
+a {
+    text-decoration: none;
+}
+
+#noteText {
+    margin-right: 0.5rem;
 }

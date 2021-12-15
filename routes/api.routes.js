@@ -8,7 +8,10 @@ import { getAllPastExercises,
         addCurrentExercise,
         addFutureExercise,
         deleteFutureExercises,
-        deleteCurrentExercises} 
+        deleteCurrentExercises,
+        editCurrentExercise,
+        editPastExercise,
+        editFutureExercise} 
     from "../controllers/api.controller.js";
 
 
@@ -21,15 +24,18 @@ apiRouter.get('/key', getKey)
 apiRouter.get("/pastExercises", getAllPastExercises)
 apiRouter.delete("/deletePast/:id", deletePastExercises)
 apiRouter.post("/addPast", addPastExercise)
+apiRouter.put('/editPast/:id', editPastExercise)
 
 // Current
 apiRouter.get("/currentExercises", getAllCurrentExercises)
 apiRouter.post("/addCurrent", addCurrentExercise)
 apiRouter.delete("/deleteCurrent/:id", deleteCurrentExercises)
+apiRouter.put("/editCurrent/:id", editCurrentExercise)
 
 // Future
 apiRouter.get("/futureExercises", getAllFutureExercises)
 apiRouter.post("/addFuture", addFutureExercise)
 apiRouter.delete("/deleteFuture/:id", deleteFutureExercises)
+apiRouter.put("/editFuture/:id", editFutureExercise)
 
 export default apiRouter;

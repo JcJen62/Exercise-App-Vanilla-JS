@@ -165,6 +165,20 @@ async function displayFutureExercises() {
     let futureDiv = document.querySelector('.future-card')
 
     futureExercises?.forEach(element => {
+        // Create New note text input
+        const noteInput = document.createElement('input')
+        noteInput.setAttribute('id', 'noteText')
+        noteInput.setAttribute('type', 'text')
+        noteInput.setAttribute('placeholder', element.notes)
+
+        // Create Save note a tag
+        const saveNewNote = document.createElement('a')
+        saveNewNote.setAttribute('href', '#')
+        saveNewNote.classList.add('card-link')
+        saveNewNote.setAttribute('data-name', element.name)
+        saveNewNote.setAttribute('id', `${element.id}`)
+        saveNewNote.innerHTML = 'Save Note'
+
         const cardDiv = document.createElement("div");
         cardDiv.classList.add("card");
         cardDiv.setAttribute("style", "width: 18rem;")
@@ -188,7 +202,7 @@ async function displayFutureExercises() {
         addToCurrent.setAttribute('id', `${element.id}`)
         addToCurrent.setAttribute('data-name', element.name)
         addToCurrent.setAttribute('data-notes', element.notes)
-        addToCurrent.innerHTML = 'Add To Past'
+        addToCurrent.innerHTML = 'Add To Current'
         cardBody.appendChild(addToCurrent)
 
         addToCurrent.addEventListener('click', (event) => {
@@ -235,6 +249,35 @@ async function displayFutureExercises() {
             displayFutureExercises()
         })
 
+        const addNotes = document.createElement('a')
+        addNotes.classList.add('card-link')
+        addNotes.setAttribute('href', '#')
+        addNotes.innerHTML = 'Alter Notes'
+        cardBody.appendChild(addNotes)
+
+        addNotes.addEventListener('click', () => {
+            cardNote.replaceWith(noteInput)
+            addNotes.replaceWith(saveNewNote)
+        })
+
+        saveNewNote.addEventListener('click', (event) => {
+            const saveNotes = async (data) => {
+                const response = await fetch(`api/editFuture/${event.currentTarget.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+            }
+            let newNote = document.querySelector('#noteText').value
+            saveNotes({ "id": event.currentTarget.id, "name": event.currentTarget.dataset.name, "notes": newNote })
+
+            document.querySelector(".future-card").innerHTML = ""
+            displayFutureExercises()
+
+        })
+
         cardDiv.appendChild(cardBody)
         futureDiv.appendChild(cardDiv)
     })
@@ -245,6 +288,20 @@ async function displayPastExercises() {
     let pastDiv = document.querySelector('.past-card')
 
     pastExercises?.forEach(element => {
+        // Create New note text input
+        const noteInput = document.createElement('input')
+        noteInput.setAttribute('id', 'noteText')
+        noteInput.setAttribute('type', 'text')
+        noteInput.setAttribute('placeholder', element.notes)
+
+        // Create Save note a tag
+        const saveNewNote = document.createElement('a')
+        saveNewNote.setAttribute('href', '#')
+        saveNewNote.classList.add('card-link')
+        saveNewNote.setAttribute('data-name', element.name)
+        saveNewNote.setAttribute('id', `${element.id}`)
+        saveNewNote.innerHTML = 'Save Note'
+
         const cardDiv = document.createElement("div");
         cardDiv.classList.add("card");
         cardDiv.setAttribute("style", "width: 18rem;")
@@ -267,6 +324,29 @@ async function displayPastExercises() {
         addNotes.setAttribute('href', '#')
         addNotes.innerHTML = 'Alter Notes'
         cardBody.appendChild(addNotes)
+
+        addNotes.addEventListener('click', () => {
+            cardNote.replaceWith(noteInput)
+            addNotes.replaceWith(saveNewNote)
+        })
+
+        saveNewNote.addEventListener('click', (event) => {
+            const saveNotes = async (data) => {
+                const response = await fetch(`api/editPast/${event.currentTarget.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+            }
+            let newNote = document.querySelector('#noteText').value
+            saveNotes({ "id": event.currentTarget.id, "name": event.currentTarget.dataset.name, "notes": newNote })
+
+            document.querySelector(".past-card").innerHTML = ""
+            displayPastExercises()
+
+        })
 
         const deleteItem = document.createElement('a')
         deleteItem.classList.add('card-link')
@@ -288,6 +368,7 @@ async function displayPastExercises() {
             displayPastExercises()
         })
 
+
         cardDiv.appendChild(cardBody)
         pastDiv.appendChild(cardDiv)
     })
@@ -298,6 +379,20 @@ async function displayCurrentExercises() {
     let currentDiv = document.querySelector('.current-card')
 
     currentExercises?.forEach(element => {
+        // Create New note text input
+        const noteInput = document.createElement('input')
+        noteInput.setAttribute('id', 'noteText')
+        noteInput.setAttribute('type', 'text')
+        noteInput.setAttribute('placeholder', element.notes)
+
+        // Create Save note a tag
+        const saveNewNote = document.createElement('a')
+        saveNewNote.setAttribute('href', '#')
+        saveNewNote.classList.add('card-link')
+        saveNewNote.setAttribute('data-name', element.name)
+        saveNewNote.setAttribute('id', `${element.id}`)
+        saveNewNote.innerHTML = 'Save Note'
+
         const cardDiv = document.createElement("div");
         cardDiv.classList.add("card");
         cardDiv.setAttribute("style", "width: 18rem;")
@@ -318,14 +413,56 @@ async function displayCurrentExercises() {
         const deleteNotes = document.createElement('a')
         deleteNotes.classList.add('card-link')
         deleteNotes.setAttribute('href', '#')
+        deleteNotes.setAttribute('id', `${element.id}`)
+        deleteNotes.setAttribute('data-name', element.name)
+        deleteNotes.setAttribute('data-notes', element.notes)
         deleteNotes.innerHTML = 'Delete Notes'
         cardBody.appendChild(deleteNotes)
+
+        deleteNotes.addEventListener('click', (event) => {
+            const deleteNotes = async (data) => {
+                const response = await fetch(`api/editCurrent/${event.currentTarget.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+            }
+            deleteNotes({ "id": event.currentTarget.id, "name": event.currentTarget.dataset.name, "notes": "" })
+
+            document.querySelector(".current-card").innerHTML = ""
+            displayCurrentExercises()
+        })
 
         const addNotes = document.createElement('a')
         addNotes.classList.add('card-link')
         addNotes.setAttribute('href', '#')
         addNotes.innerHTML = 'Alter Notes'
         cardBody.appendChild(addNotes)
+
+        addNotes.addEventListener('click', () => {
+            cardNote.replaceWith(noteInput)
+            addNotes.replaceWith(saveNewNote)
+        })
+
+        saveNewNote.addEventListener('click', (event) => {
+            const saveNotes = async (data) => {
+                const response = await fetch(`api/editCurrent/${event.currentTarget.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+            }
+            let newNote = document.querySelector('#noteText').value
+            saveNotes({ "id": event.currentTarget.id, "name": event.currentTarget.dataset.name, "notes": newNote })
+
+            document.querySelector(".current-card").innerHTML = ""
+            displayCurrentExercises()
+
+        })
 
         const addToPast = document.createElement('a')
         addToPast.classList.add('card-link')
